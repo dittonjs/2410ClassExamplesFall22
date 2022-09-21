@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.widget.LinearLayout
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mainLayout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
         }
-//        mainLayout.addView(CircleView(this))
-        mainLayout.addView(CircleView(this))
+        val drawingView = DrawingView(this)
+        mainLayout.addView(drawingView)
         setContentView(mainLayout)
     }
 }

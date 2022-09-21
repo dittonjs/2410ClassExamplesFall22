@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.LinearLayout
 
 class MainActivity : AppCompatActivity() {
+
+    val data = mutableListOf<String>()
+    var currentIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val webView = WebView(this)
