@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contador</string>
+    <string name="decrement">Reducir</string>
+    <string name="increment">Aumentar</string>
+</resources>
