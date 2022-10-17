@@ -18,6 +18,7 @@ class DrawingView(context: Context): View(context) {
     private val circles = mutableListOf<Circle>()
     init {
         setOnTouchListener { _, motionEvent ->
+            println("I got called")
             if(motionEvent.action == MotionEvent.ACTION_DOWN) {
                 println(motionEvent.pointerCount)
                 for (fingerIndex in 0 until motionEvent.pointerCount) {
@@ -25,7 +26,7 @@ class DrawingView(context: Context): View(context) {
                 }
                 invalidate()
             }
-            return@setOnTouchListener true
+            return@setOnTouchListener false
         }
     }
 

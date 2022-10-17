@@ -1,7 +1,5 @@
 fun main(args: Array<String>) {
     val looper = Looper()
-    val looper2: Looper? = null
-    val age: Int? = 10
     looper.start()
     val mainActivity = MainActivity(looper)
     mainActivity.onCreate()

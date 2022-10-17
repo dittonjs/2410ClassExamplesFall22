@@ -14,7 +14,8 @@ class ProfileFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return TextView(context).apply {
-            text = "Hello, from the profile fragment"
+            val activity: MainActivity = context as MainActivity
+            text = "${activity.count}"
         }
     }
 }

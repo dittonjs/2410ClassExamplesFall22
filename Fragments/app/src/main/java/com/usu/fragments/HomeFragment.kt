@@ -15,6 +15,17 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.decrement.setOnClickListener {
+            val activity: MainActivity = context as MainActivity
+            activity.count --
+            binding.count.text = "${activity.count}"
+        }
+
+        binding.increment.setOnClickListener {
+            val activity: MainActivity = context as MainActivity
+            activity.count ++
+            binding.count.text = "${activity.count}"
+        }
         return binding.root
     }
 }

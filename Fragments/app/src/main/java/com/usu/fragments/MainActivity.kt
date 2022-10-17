@@ -5,13 +5,18 @@ import android.os.Bundle
 import com.usu.fragments.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    public var count = 0
+    var count = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
 
         binding.home.setOnClickListener {
-
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, HomeFragment::class.java, null)
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.profile.setOnClickListener {
