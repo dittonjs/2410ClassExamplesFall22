@@ -21,7 +21,10 @@ class MainActivity : AppCompatActivity() {
             Contact("Person ${it}", "${it}", "person$it@usu.edu")
         }.toList()
 
-        binding.recyclerView.adapter = ContactsAdapter(contacts)
+        binding.recyclerView.adapter = ContactsAdapter(contacts) {contact ->
+            binding.selectedContact.text = "Last selected contact: ${contact.name}"
+        }
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         val startTime = System.currentTimeMillis()
