@@ -6,25 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.usu.todosmvvm.databinding.FragmentTodosBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 class TodosFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = FragmentTodosBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(this).get(TodosViewModel::class.java)
+        val viewModel = TodosViewModel()
 
-        viewModel.hasError.observe(viewLifecycleOwner) {
-
+        binding.todosList.adapter = TodosAdapter(viewModel.todos)
+        binding.todosList.layoutManager = LinearLayoutManager(context)
+        viewModel.errorMessage.observe(viewLifecycleOwner) {errorMessage ->
+            binding.errorOutput.text = errorMessage
         }
-
         binding.saveButton.setOnClickListener {
             viewModel.createTodo(binding.todoInput.text.toString())
             binding.todoInput.setText("")
