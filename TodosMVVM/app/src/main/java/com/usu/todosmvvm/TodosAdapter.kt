@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
-import androidx.databinding.ObservableList.OnListChangedCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.usu.todosmvvm.databinding.TodoListItemBinding
 import com.usu.todosmvvm.models.Todo
@@ -14,7 +13,44 @@ class TodosAdapter(val todos: ObservableArrayList<Todo>): RecyclerView.Adapter<T
 
 
     init {
+        todos.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableArrayList<Todo>>() {
+            override fun onChanged(sender: ObservableArrayList<Todo>?) {
+                notifyDataSetChanged()
+            }
 
+            override fun onItemRangeChanged(
+                sender: ObservableArrayList<Todo>?,
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                notifyItemChanged(positionStart)
+            }
+
+            override fun onItemRangeInserted(
+                sender: ObservableArrayList<Todo>?,
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                notifyItemInserted(positionStart)
+            }
+
+            override fun onItemRangeMoved(
+                sender: ObservableArrayList<Todo>?,
+                fromPosition: Int,
+                toPosition: Int,
+                itemCount: Int
+            ) {
+
+            }
+
+            override fun onItemRangeRemoved(
+                sender: ObservableArrayList<Todo>?,
+                positionStart: Int,
+                itemCount: Int
+            ) {
+                notifyItemRemoved(positionStart)
+            }
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
