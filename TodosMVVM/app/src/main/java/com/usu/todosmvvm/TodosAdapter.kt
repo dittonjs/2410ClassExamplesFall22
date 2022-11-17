@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.usu.todosmvvm.databinding.TodoListItemBinding
 import com.usu.todosmvvm.models.Todo
 
-class TodosAdapter(val todos: ObservableArrayList<Todo>): RecyclerView.Adapter<TodosAdapter.ViewHolder>() {
+class TodosAdapter(val todos: ObservableArrayList<Todo>, val onTodoClicked: (Todo) -> Unit): RecyclerView.Adapter<TodosAdapter.ViewHolder>() {
     class ViewHolder(val binding: TodoListItemBinding): RecyclerView.ViewHolder(binding.root)
 
 
@@ -62,6 +62,9 @@ class TodosAdapter(val todos: ObservableArrayList<Todo>): RecyclerView.Adapter<T
         val todo = todos[position]
         holder.binding.checkBox.text = todo.description
         holder.binding.checkBox.isChecked = todo.completed
+        holder.binding.checkBox.setOnClickListener {
+            onTodoClicked(todo)
+        }
         // do some stuff when the user checks a box
     }
 
