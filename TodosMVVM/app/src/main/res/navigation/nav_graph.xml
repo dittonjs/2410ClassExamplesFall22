@@ -9,5 +9,14 @@
         android:id="@+id/todosFragment"
         android:name="com.usu.todosmvvm.TodosFragment"
         android:label="fragment_todos"
-        tools:layout="@layout/fragment_todos" />
+        tools:layout="@layout/fragment_todos" >
+        <action
+            android:id="@+id/action_todosFragment_to_todoCreationFragment"
+            app:destination="@id/todoCreationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoCreationFragment"
+        android:name="com.usu.todosmvvm.TodoCreationFragment"
+        android:label="fragment_todo_creation"
+        tools:layout="@layout/fragment_todo_creation" />
 </navigation>

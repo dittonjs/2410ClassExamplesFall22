@@ -5,6 +5,8 @@ import com.usu.todosmvvm.models.Todo
 
 object TodosRepository {
     private val db: AppDatabase;
+    private var cacheInitialized = false;
+    private val todosCache = mutableListOf<Todo>()
     init {
         db = Room.databaseBuilder(
             TodosApplication.getInstance(),
@@ -13,16 +15,24 @@ object TodosRepository {
         ).build()
     }
 
-    suspend fun createTodo(todo: Todo): Long {
-        return db.getTodosDao().createTodo(todo)
+    suspend fun createTodo(todo: Todo) {
+        todo.id = db.getTodosDao().createTodo(todo)
+        todosCache.add(todo)
     }
 
     suspend fun getAllTodos(): List<Todo> {
-        return db.getTodosDao().getAllTodos()
+        if (!cacheInitialized) {
+            todosCache.addAll(db.getTodosDao().getAllTodos())
+            cacheInitialized = true
+        }
+        return todosCache
     }
 
     suspend fun update(todo: Todo) {
         db.getTodosDao().updateTodo(todo)
+        todosCache[todosCache.indexOfFirst {
+            it.id == todo.id
+        }] = todo
     }
 
 }

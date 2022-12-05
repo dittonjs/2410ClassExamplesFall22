@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.usu.todosmvvm.databinding.FragmentTodosBinding
 
@@ -22,12 +23,9 @@ class TodosFragment : Fragment() {
             viewModel.toggleTodoCompletion(it)
         }
         binding.todosList.layoutManager = LinearLayoutManager(context)
-        viewModel.errorMessage.observe(viewLifecycleOwner) {errorMessage ->
-            binding.errorOutput.text = errorMessage
-        }
-        binding.saveButton.setOnClickListener {
-            viewModel.createTodo(binding.todoInput.text.toString())
-            binding.todoInput.setText("")
+
+        binding.createTodo.setOnClickListener {
+            findNavController().navigate(R.id.action_todosFragment_to_todoCreationFragment)
         }
         return binding.root
     }
